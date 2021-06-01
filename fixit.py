@@ -1,8 +1,8 @@
-import json
-import ast
-
 # copy data from clipboard to file on unix: 
 # xsel --clipboard > ~/map.json
+
+import json
+import ast
 
 with open('map.json', 'r') as f:
     data = f.read()
@@ -23,7 +23,8 @@ while data_test_str.find("chunkFootprint") != -1:
     a = data_test_str.find("{")
     b = data_test_str[cf+1:].find("chunkFootprint")
     if b != -1:
-        one_chunk = eval_str(data_test_str[a:cf+1+b-3])
+#         one_chunk = eval_str(data_test_str[a:cf+1+b-3])
+        one_chunk = data_test_str[a:cf+1+b-3]
         chunk_list.append(one_chunk)
         data_test_str = data_test_str[cf+1+b-2:]
         cf=0
@@ -32,9 +33,10 @@ while data_test_str.find("chunkFootprint") != -1:
         if i%1000==0:
             print(i,one_chunk)
     else:
+#         one_chunk = eval_str(data_test_str[a:])
         one_chunk = data_test_str[a:]
         data_test_str=""
-        chunk_list.append(eval_str(one_chunk))
+        chunk_list.append(one_chunk)
         print("Chunk list ready, len:",len(chunk_list))
         
 chunks_dump = [] 
@@ -50,7 +52,10 @@ for chunk in chunk_list:
         print("Saving",'df_chunked_'+str(f_nr)+'.json')
         i=0
         file = open('df_chunked_'+str(f_nr)+'.json','w')
-        file.write("["+str(chunks_dump)[1:-1]+"]")
+        chunks_dump_str=""
+        for chunk_str in chunks_dump:
+            chunks_dump_str+=chunk_str+','
+        file.write("["+chunks_dump_str+"]")
         file.close()
         chunks_dump = []
         f_nr+=1
@@ -58,7 +63,10 @@ if i>0:
     print("Saving",'df_chunked_'+str(f_nr)+'.json')
     i=0
     file = open('df_chunked_'+str(f_nr)+'.json','w')
-    file.write("["+str(chunks_dump)[1:-1]+"]")
+    chunks_dump_str=""
+    for chunk_str in chunks_dump:
+        chunks_dump_str+=chunk_str+','
+    file.write("["+chunks_dump_str+"]")
     file.close()
     chunks_dump = []
     f_nr+=1
