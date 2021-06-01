@@ -42,7 +42,7 @@ while data_test_str.find("chunkFootprint") != -1:
         print("Chunk list ready, len:",len(chunk_list))
         
 chunks_dump = [] 
-FILE_CHUNKS_LIMIT = 100 # limit 100 chunks per file
+FILE_CHUNKS_LIMIT = 1000 # limit 1000 chunks per file
 i = 0
 f_nr = 1
 print("Dumping data to files")
