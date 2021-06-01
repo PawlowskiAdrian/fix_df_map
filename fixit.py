@@ -1,5 +1,7 @@
 # copy data from clipboard to file on unix: 
 # xsel --clipboard > ~/map.json
+# paste data:
+# cat ./df_chunked_1.json | xclip -selection c
 
 import json
 import ast
