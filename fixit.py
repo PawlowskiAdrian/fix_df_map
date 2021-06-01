@@ -55,7 +55,7 @@ for chunk in chunk_list:
         chunks_dump_str=""
         for chunk_str in chunks_dump:
             chunks_dump_str+=chunk_str+','
-        file.write("["+chunks_dump_str+"]")
+        file.write("["+chunks_dump_str[:-1]+"]")
         file.close()
         chunks_dump = []
         f_nr+=1
@@ -66,7 +66,7 @@ if i>0:
     chunks_dump_str=""
     for chunk_str in chunks_dump:
         chunks_dump_str+=chunk_str+','
-    file.write("["+chunks_dump_str+"]")
+    file.write("["+chunks_dump_str[:-1]+"]")
     file.close()
     chunks_dump = []
     f_nr+=1
